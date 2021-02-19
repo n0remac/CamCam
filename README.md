@@ -38,7 +38,7 @@ Enter the ffmpeg directory.
 Run: <br>
 `./configure --enable-libzmq --enable-muxer=mpeg`
 Run: <br>
-`make`
+`make`<br>
 Run: <br>
 `sudo make install`
 
@@ -53,7 +53,7 @@ Clone this repository.
 
 Make sure the environment is started and you have created your dummy cam with (Described in that loopback link).
 
-Run the code!
+Run the code!<br>
 `python dynamic_overlay.py`
 
 ### Troubleshooting
