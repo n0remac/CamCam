@@ -1,9 +1,9 @@
 # CamCam
 
 ## Introduction
-This is a fancy little tool that will allow you to put an overplay on your webcam. I developed it after being fed up with the lack of innovation in the online interview space. I've made this as simple as possible to anyone to set it up and for others to build on top of it. I hope this help you stand out or that you make some cool new innovations. I am new to a lot of these technologies an would appreciate any feedback and insights. Feel free to reach out on discord -> n0remac#9451.
+This is a fancy little tool that will allow you to put an overlay on your webcam. I developed it after being fed up with the lack of innovation in the online interview space. I've made this as simple as possible to allow anyone to set it up and expand upon. I hope this help you stand out or make something amazing. I am new to a lot of these technologies and would appreciate any feedback and insights. Feel free to reach out on discord -> n0remac#9451.
 
-There are three main components: a dummy cam that you can stream custom content into, and FFMpeg script to create the overlay and stream to the dummy cam, and an optional bit of OpenCV allow you to use gestures to effect the video stream. The name CamCam is in reference to taking input from your webcam and outputting it to a dummy cam, but it's also one of my nicknames :P
+There are three main components: a dummy cam, an FFMpeg script to create the overlay and stream to the dummy cam, and a bit of OpenCV to allow you to use gestures to effect the video stream. The name CamCam is in reference to taking input from your webcam and outputting it to a dummy cam, but it's also one of my nicknames :P
 
 ## Setup
 The following works on Linux. If you are using Mac or Windows you will need to find another way to send the stream to a dummy webcam. One possible option is to stream to VLC, capture that with OBS, then use OBS Virtualcam. I tested streaming to VLC but that already had too much latency. I will put those instructions at the end just in case someone can figure out how to optimize them.
@@ -23,14 +23,14 @@ Install requirements:<br>
 If you only want the overlay without the OpenCV component you don't actually need any of the requirements.
 
 ## Dummy cam
-I used a great kernal module called v4l2loopback. It's setup and use is well documented here https://github.com/umlaeute/v4l2loopback.
+I used a great kernal module called v4l2loopback. Its setup and use is well documented here https://github.com/umlaeute/v4l2loopback.
 
 If you are on Windows or Mac the only option I came up with is to stream to VLC then pick that up with OBS and send it to OBS Virtualcam. Ooof. You best bet would be to install Linux then uninstall Windows (or just use virtualbox).
 
 ## FFMpeg
-The basic install of FFMpeg can handle the overlay, but if you want to change the position of your overlay while the script is running you will need to compile FFMpeg with zmq. This was the hardest part for me to figure out. You will need to have `make` installed. If you use FFMpeg for other things be careful here. By doing this I lost some of the libraries that my default version of FFMpeg came with and needed to remake it.
+The basic install of FFMpeg can handle the overlay, but if you want to change the position of your overlay while the script is running you will need to compile FFMpeg with zmq. This was the hardest part for me to figure out. You will need to have `make` installed. If you use FFMpeg for other things be careful here. By doing this I lost some of the libraries that my default version of FFMpeg came with and needed to remake it again.
 
-What you need to do is download the source code from here https://ffmpeg.org/download.html or run:<br>
+To compile from source download it from github:<br>
 `git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg`
 
 Enter the ffmpeg directory.
@@ -42,16 +42,17 @@ Run: <br>
 Run: <br>
 `sudo make install`
 
-You can use the --enable-muxer=mpeg flag if you want to try streaming to VLC. I'll say it again; when I compiled this way I lost a lot of configurations so make sure this is what you want to do.
+You can use the --enable-muxer=mpeg flag if you want to try streaming to VLC. This will take a long time and spit out a lot of warning messages to the console, but its working, probably. I'll say it again; when I compiled this way I lost a lot of configurations so make sure this is what you want to do.
 
 You can get more information here https://trac.ffmpeg.org/wiki/CompilationGuide. I used the "Generic compilation guide" for all platforms at the top.
 
 ## The code
 If everything went well you should be good to go with the code.
 
-Clone this repository.
+Clone this repository:<br>
+`https://github.com/n0remac/CamCam.git`
 
-Make sure the environment is started and you have created your dummy cam with (Described in that loopback link).
+Make sure the environment is started and you have created your dummy cam (Described in that loopback link).
 
 Run the code!<br>
 `python dynamic_overlay.py`
